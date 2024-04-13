@@ -1,0 +1,90 @@
+﻿<Window x:Class="InventoryReports.PartNumberWarehouseReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        xmlns:local="clr-namespace:InventoryReports"
+        mc:Ignorable="d"
+        Title="PartNumberWarehouseReport" Height="700" Width="900" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#20232A" />
+            <Setter Property="Foreground" Value="#FFC9E0DC" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="./#Segoe UI" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Path x:Name="PathIcon" Width="0" Height="0" Stretch="Fill" Fill="#4C87B3" HorizontalAlignment="Left" Margin="17,0,0,0" Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "/>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF635B5B" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter TargetName="PathIcon" Property="Fill" Value="Black" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter Property="Background" Value="#FF635B5B" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter TargetName="PathIcon" Property="Fill" Value="Black" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF981E2A" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="AliceBlue" Offset="0"/>
+                <GradientStop Color="RoyalBlue" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid Height="23" VerticalAlignment="Top" Background="AliceBlue" MouseLeftButtonDown="Grid_MouseLeftButtonDown"/>
+        <Image HorizontalAlignment="Left" Height="72" Margin="383,23,0,0" VerticalAlignment="Top" Width="121" Stretch="Fill" Source="logo.png"/>
+        <Label x:Name="lblTitle" Content="Warehouse Part Number Report" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" HorizontalAlignment="Left" Margin="9,101,0,0" VerticalAlignment="Top" Width="873"/>
+        <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="747,415,0,0" VerticalAlignment="Top" Width="125" Height="55" FontSize="18" Click="btnPrint_Click"/>
+        <Button x:Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="747,535,0,0" VerticalAlignment="Top" Width="125" Height="55" FontSize="18" Click="btnClose_Click"/>
+        <Button x:Name="btnMainMenu" Content="Main Menu" HorizontalAlignment="Left" Margin="747,475,0,0" VerticalAlignment="Top" Width="125" Height="55" FontSize="18" Click="btnMainMenu_Click"/>
+        <TextBox x:Name="txtEnterPartNumber" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="199,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblEnterPartNumber" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="Enter Part Information" HorizontalAlignment="Left" Margin="45,152,0,0" VerticalAlignment="Top" Width="149"/>
+        <ComboBox x:Name="cboSelectWarehouse" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" IsReadOnly="True" HorizontalAlignment="Left" Margin="500,149,0,0" VerticalAlignment="Top" Width="129" Height="32" SelectionChanged="cboSelectWarehouse_SelectionChanged"/>
+        <Label x:Name="lblSelectWarehouse" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="Select Warehouse" HorizontalAlignment="Left" Margin="345,152,0,0" VerticalAlignment="Top" Width="149"/>
+        <TextBox x:Name="txtEnterStartDate" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="199,192,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblEnterStartDate" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="Enter Start Date" HorizontalAlignment="Left" Margin="45,195,0,0" VerticalAlignment="Top" Width="149"/>
+        <TextBox x:Name="txtEnterEndDate" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="499,192,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblEnterEndDate" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="Enter End Date" HorizontalAlignment="Left" Margin="345,195,0,0" VerticalAlignment="Top" Width="149"/>
+        <Button x:Name="btnFindTransactions" FontSize="18" HorizontalAlignment="Left" Margin="650,152,0,0" VerticalAlignment="Top" Width="105" Height="72" Click="btnFindTransactions_Click">
+            <TextBlock x:Name="tblFindTransactions" TextWrapping="Wrap" Text="Find Transactions" TextAlignment="Center"/>
+        </Button>
+        <TextBox x:Name="txtPartID" IsReadOnly="True" Background="LightGray" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="143,277,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblPartID" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="Part ID" HorizontalAlignment="Left" Margin="45,280,0,0" VerticalAlignment="Top" Width="93"/>
+        <TextBox x:Name="txtPartNumber" IsReadOnly="True" Background="LightGray" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="143,321,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblPartNumber" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="Part Number" HorizontalAlignment="Left" Margin="45,324,0,0" VerticalAlignment="Top" Width="93"/>
+        <TextBox x:Name="txtJDEPartNumber" IsReadOnly="True" Background="LightGray" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="421,277,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblJDEPartNumber" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="JDE Part Number" HorizontalAlignment="Left" Margin="298,280,0,0" VerticalAlignment="Top" Width="118"/>
+        <TextBox x:Name="txtPartDescription" IsReadOnly="True" Background="LightGray" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="421,321,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblPartDescription" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="Part Description" HorizontalAlignment="Left" Margin="298,324,0,0" VerticalAlignment="Top" Width="118"/>
+        <TextBox x:Name="txtQTYIssued" IsReadOnly="True" Background="LightGray" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="701,277,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblQTYIssued" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="QTY Issued" HorizontalAlignment="Left" Margin="605,280,0,0" VerticalAlignment="Top" Width="91"/>
+        <TextBox x:Name="txtQTYReceived" IsReadOnly="True" Background="LightGray" CharacterCasing="Upper" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left" Height="32" Margin="701,321,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Label x:Name="lblQTYReceived" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="14" Content="QTYReceived" HorizontalAlignment="Left" Margin="605,324,0,0" VerticalAlignment="Top" Width="91"/>
+        <Label x:Name="lblPartTotals" Content="Part Totals" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" HorizontalAlignment="Left" Margin="9,236,0,0" VerticalAlignment="Top" Width="873"/>
+        <DataGrid x:Name="dgrResults" HorizontalAlignment="Left" Height="267" Margin="10,415,0,0" VerticalAlignment="Top" Width="712"/>
+        <Label x:Name="lblPartTransactioins" Content="Part Transactions" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" HorizontalAlignment="Left" Margin="10,363,0,0" VerticalAlignment="Top" Width="712"/>
+    </Grid>
+</Window>
